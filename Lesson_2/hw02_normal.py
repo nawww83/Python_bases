@@ -64,5 +64,19 @@ lst = [1, 2, 4, 5, 6, 2, 5, 2]
 
 lst2 = set(lst)
 
+print('a:')
+# a
 for l in lst2:
     print(l)
+
+print('b:')
+
+# b
+lst3 = []
+for l in lst2:
+    if lst.count(l) == 1:
+        lst3.append(l)
+
+for l in lst3:
+    print(l)
+
