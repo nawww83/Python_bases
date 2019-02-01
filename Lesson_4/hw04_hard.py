@@ -14,6 +14,14 @@ matrix = [[1, 0, 8],
 
 # Суть сложности hard: Решите задачу в одну строку
 
+matrix = [[1, 0, 8],
+          [3, 4, 1],
+          [0, 4, 2]]
+
+matrix_r = list( map( lambda x: list(x), zip(*matrix)) )
+
+print(matrix_r)
+
 
 # Задание-2:
 # Найдите наибольшее произведение пяти любых цифр в 1000-значном числе.
@@ -40,4 +48,28 @@ number = """
 84580156166097919133875499200524063689912560717606
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450"""
+
+from functools import reduce # если позволите
+
+print(type(number))
+
+ln = list(number)
+
+max_mult = 0
+index = -1
+lm = []
+for i,el in enumerate(ln):
+    l5 = ln[i:i+5]
+    try:    
+        li5 = list(map(int, l5))
+        mult = reduce(lambda x,y : x*y, li5)
+        if mult > max_mult:
+            max_mult = mult
+            index = i
+            lm = li5
+    except ValueError:
+        pass
+
+print(index, max_mult)
+print(lm)
 
