@@ -15,15 +15,32 @@
 # и импортированные в данный файл из easy.py
 # ИСПОЛЬЗОВАТЬ МОДУЛЬ OS и SHUTIL
 
+import sys
+import os
+import hw05_easy as my_os
 
+def list_dir(name=''):
+    print(os.listdir())
 
+do = {
+'1': my_os.change_dir,
+'2': list_dir,
+'3': my_os.remove_dir,
+'4': my_os.make_dir
+}
 
-
-
-
-
-
-
-
-
+while True:
+    print('1 - Перейти в директорию')
+    print('2 - Просмотреть содержимое текущей директории')
+    print('3 - Удалить директорию')
+    print('4 - Создать директорию')
+    print('q - Завершить работу')
+    f = input()
+    name = ''
+    if f.isdigit() and not f == '2':
+        name = input('Введите имя директории:')
+    if do.get(f):
+        do[f](name)
+    elif f == 'q':
+        sys.exit()
 
