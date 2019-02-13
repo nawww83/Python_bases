@@ -10,6 +10,26 @@ positions. Она будет содержать список с должност
 элемент в список
 '''
 
+class Command:
+    def __init__(self, positions):
+        self.__positions = positions
+        
+    def __len__(self):
+        print('Метод __len__() переопределен')
+        return len(self.__positions)
+
+    def __contains__(self, position):
+        return position in self.__positions
+
+C1 = Command(['Дворник', 'Техничка', 'Электрик', 'Сантехник'])
+
+print(len(C1))
+
+print(C1.__contains__('Техничка'))
+
+print(C1.__contains__('Слесарь'))
 
 
+print('Сантехник' in C1)
 
+# print(C1.__positions)
