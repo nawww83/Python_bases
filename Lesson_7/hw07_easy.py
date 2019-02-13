@@ -3,6 +3,18 @@
 и т.д.
 '''
 
+class my_list(list):
+    def __getitem__(self, offset):
+        return list.__getitem__(self, offset - 5)
+
+A = my_list([7,2,4,6])
+
+print(A)
+print(A[5])
+print(A[4])
+# Вопрос: почему нельзя вызвать super().__getitem__() ?
+
+
 '''
 Задача-2: Придумать любу структуру данных. Она должна содержать два атрибута.
 Значение одного атрибута передается в конструктор, а значение другого - определяетсяъ
@@ -14,6 +26,34 @@
 между подходом с использованием метода __str__ и без него.
 '''
 
+import math
+
+class BSC:
+    '''
+    Класс "Двоичный канал без памяти (Binary Symmetric Channel)"
+    '''
+    def __init__(self, p):
+        self.p = p # Вероятность ошибки
+        self.ip = 1 - p
+    
+    def capacity(self):
+        return 0 if self.p == 0 or self.p == 1 else 1 + self.p * math.log2(self.p) + self.ip * math.log2(self.ip)
+
+    def __str__(self):
+        return 'Пропускная способность канала BSC {} бит/символ'.format(self.capacity())
+
+    @staticmethod
+    def _capacity(p):
+        return 0 if p == 0 or p == 1 else 1 + p * math.log2(p) + (1 - p) * math.log2((1 - p))
+
+channel1 = BSC(0.5)
+print(channel1)
+
+channel2 = BSC(0.1)
+print(channel2)
+
+# Без переопределения метода __str__() функция print(object) печатает стандартный шаблон: main.имя класса адрес объекта в памяти
+
 '''
 Задача-3: Продолжить работу над задачей 2. Добавить еще один метод. Он должен
 вывзваться из экземпляра класса. В этот метод нужно передать некое значение.
@@ -21,5 +61,5 @@
 Реализовать для этого метода декоратор @staticmethod
 '''
 
-
+print(channel2._capacity(0.01))
 
